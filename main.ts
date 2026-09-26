@@ -1,16 +1,18 @@
+info.onCountdownEnd(function () {
+    game.gameOver(true)
+})
 // Ball hits paddle
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (ball, paddle) {
     ball.vy = 0 - Math.abs(ball.vy)
     info.changeScoreBy(1)
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
 })
 // Ball touches the big line = GAME OVER
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (ball, line) {
     game.over(false)
 })
+game.splash("Ping Pong")
 info.startCountdown(15)
-info.onCountdownEnd(function() {
-    game.gameOver(true)
-})
 // Background
 scene.setBackgroundColor(9)
 info.setScore(0)
